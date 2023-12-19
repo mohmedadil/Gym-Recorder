@@ -17,11 +17,13 @@ class GymDayViewBody extends StatefulWidget {
 class _GymDayViewBodyState extends State<GymDayViewBody> {
   @override
   void initState() {
-    BlocProvider.of<GymdayCubit>(context).fetchallcard();    super.initState();
+    BlocProvider.of<GymdayCubit>(context).fetchallcard();
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  const Column(
+    return const Column(
       children: [
         Expanded(child: GymDayListView()),
         GymFloatingButton(),

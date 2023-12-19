@@ -8,6 +8,7 @@ part 'add_gym_day_state.dart';
 
 class AddGymDayCubit extends Cubit<AddGymDayState> {
   AddGymDayCubit() : super(AddGymDayInitial());
+  ExerciseNumber? numbers;
   int? lenght;
   addDay(GymModel model) async {
     emit(AddGymDayLoading());

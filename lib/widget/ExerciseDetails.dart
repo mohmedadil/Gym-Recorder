@@ -8,9 +8,10 @@ class ExerciseDetails extends StatelessWidget {
     this.rep,
     this.kg,
     this.sets,
+    this.saves,
   });
   void Function(String?)? sets, rep, kg;
-
+  void Function()? saves;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +26,7 @@ class ExerciseDetails extends StatelessWidget {
               width: 40,
               height: 40,
               child: Custom_Text_Field_Rectangle(
-                hint: '5',
+                hint: '0',
                 onsaved: sets,
               ),
             ),
@@ -40,7 +41,7 @@ class ExerciseDetails extends StatelessWidget {
                 width: 40,
                 height: 40,
                 child: Custom_Text_Field_Rectangle(
-                  hint: '5',
+                  hint: '0',
                   onsaved: rep,
                 )),
           ),
@@ -53,7 +54,7 @@ class ExerciseDetails extends StatelessWidget {
             child: Container(
               width: 40,
               height: 40,
-              child: Custom_Text_Field_Rectangle(hint: '5', onsaved: kg),
+              child: Custom_Text_Field_Rectangle(hint: '0', onsaved: kg),
             ),
           ),
         ],
@@ -61,4 +62,3 @@ class ExerciseDetails extends StatelessWidget {
     );
   }
 }
-

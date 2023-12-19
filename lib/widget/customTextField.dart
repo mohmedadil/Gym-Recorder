@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class Custom_Text_Field extends StatelessWidget {
-  const Custom_Text_Field({super.key, required this.hint, this.maxLines = 1, this.onsaved, this.onChange});
+  const Custom_Text_Field(
+      {super.key,
+      required this.hint,
+      this.maxLines = 1,
+      this.onsaved,
+      this.onChange});
   final String hint;
   final int maxLines;
   final void Function(String?)? onsaved;
-  final  Function(String)? onChange;
+  final Function(String)? onChange;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged:onChange ,
+      onChanged: onChange,
       onSaved: onsaved,
       validator: (value) {
         if (value?.isEmpty ?? true) {
@@ -38,15 +43,20 @@ class Custom_Text_Field extends StatelessWidget {
 }
 
 class Custom_Text_Field_Rectangle extends StatelessWidget {
-  const Custom_Text_Field_Rectangle({super.key, required this.hint, this.maxLines = 1, this.onsaved, this.onChange});
+  const Custom_Text_Field_Rectangle(
+      {super.key,
+      required this.hint,
+      this.maxLines = 1,
+      this.onsaved,
+      this.onChange});
   final String hint;
   final int maxLines;
   final void Function(String?)? onsaved;
-  final  Function(String)? onChange;
+  final Function(String)? onChange;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged:onChange ,
+      onChanged: onChange,
       onSaved: onsaved,
       validator: (value) {
         if (value?.isEmpty ?? true) {
@@ -58,6 +68,7 @@ class Custom_Text_Field_Rectangle extends StatelessWidget {
       cursorColor: kPrimarycolor,
       maxLines: maxLines,
       decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
           hintText: hint,
           border: buildborder(),
           enabledBorder: buildborder(),
@@ -68,6 +79,6 @@ class Custom_Text_Field_Rectangle extends StatelessWidget {
   OutlineInputBorder buildborder({color}) {
     return OutlineInputBorder(
         borderSide: BorderSide(color: color ?? Colors.white),
-        borderRadius: BorderRadius.circular(20));
+        borderRadius: BorderRadius.circular(30));
   }
 }

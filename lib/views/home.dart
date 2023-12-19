@@ -6,7 +6,6 @@ import 'package:gym_history/widget/FloatingButton.dart';
 import 'package:gym_history/widget/card.dart';
 import 'package:gym_history/widget/gymdaylistview.dart';
 
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -23,4 +22,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

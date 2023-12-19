@@ -37,11 +37,11 @@ class ExercisesModel extends HiveObject {
 class ExerciseNumber extends HiveObject {
 
   @HiveField(0)
-  final int set;
+   int set;
   @HiveField(1)
-  final int rep;
+   int rep;
   @HiveField(2)
-  final int kg;
+   int kg;
    @HiveField(3)
   final int id;
   ExerciseNumber(this.set, this.rep, this.kg, this.id);

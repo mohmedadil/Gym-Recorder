@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gym_history/cubits/gym/cubit/gymday_cubit.dart';
 import 'package:gym_history/models/gymmodel.dart';
 import 'package:gym_history/widget/shownumberdetails.dart';
+import '../cubits/gym/cubit/gymday_cubit.dart';
 
 class GymExerciseDetails extends StatefulWidget {
   final ExercisesModel exercise;
@@ -14,7 +14,6 @@ class GymExerciseDetails extends StatefulWidget {
 
 class _GymExerciseDetailsState extends State<GymExerciseDetails> {
   List<ExerciseNumber> details = [];
-  List<ExerciseNumber> mydetails = [];
   @override
   @override
   Widget build(BuildContext context) {
@@ -40,14 +39,13 @@ class _GymExerciseDetailsState extends State<GymExerciseDetails> {
                     ),
                     subtitle: Container(
                       width: 100,
-                      height: 100,
+                      height: 150,
                       child: ListView.builder(
                         itemBuilder: (context, index) {
-                          return ShowNumberDetails(
-                              exercise: details[index]);
+                          return ShowNumberDetails(exercise: details[index]);
                         },
                         itemCount: details.length,
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: BouncingScrollPhysics(),
                       ),
                     ),
                     trailing: IconButton(
@@ -57,6 +55,8 @@ class _GymExerciseDetailsState extends State<GymExerciseDetails> {
                       ),
                       onPressed: () {
                         widget.exercise.delete();
+                        BlocProvider.of<GymdayCubit>(context).fetchallexercisecard();
+
                       },
                     ),
                   ),

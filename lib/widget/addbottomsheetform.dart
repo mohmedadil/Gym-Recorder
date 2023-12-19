@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gym_history/cubits/cubit/add_gym_day_cubit.dart';
 import 'package:gym_history/models/gymmodel.dart';
-import 'package:gym_history/widget/ExerciseDetails.dart';
 import 'package:gym_history/widget/customTextField.dart';
 import 'package:gym_history/widget/custombutton.dart';
 import 'package:intl/intl.dart';
@@ -25,7 +24,11 @@ class _AddFormGymState extends State<AddFormGym> {
   String? muscalename, date;
   @override
   Widget build(BuildContext context) {
-    id = BlocProvider.of<GymdayCubit>(context).id! + 1;
+    if (BlocProvider.of<GymdayCubit>(context).id! <= 0) {
+      id = BlocProvider.of<GymdayCubit>(context).id! + 1;
+    } else {
+      id = 0;
+    }
     return Form(
       key: key,
       child: Column(
@@ -78,4 +81,3 @@ class _AddFormGymState extends State<AddFormGym> {
     );
   }
 }
-

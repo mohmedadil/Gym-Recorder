@@ -15,7 +15,6 @@ class AddBottomSheetGym extends StatelessWidget {
       child: SingleChildScrollView(
         child: BlocConsumer<AddGymDayCubit, AddGymDayState>(
           listener: (context, state) {
-
             if (state is AddGymDaySuccess) {
               Navigator.pop(context);
               BlocProvider.of<GymdayCubit>(context).fetchallcard();

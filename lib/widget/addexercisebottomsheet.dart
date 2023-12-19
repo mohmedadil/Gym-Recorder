@@ -18,7 +18,9 @@ class AddBottomSheetGymExercise extends StatefulWidget {
 }
 
 class _AddBottomSheetGymExerciseState extends State<AddBottomSheetGymExercise> {
-  int? kg, rep, sets, eid;
+  int? eid;
+  List<int> num = [];
+  int counter = 1;
   AutovalidateMode autovaldite = AutovalidateMode.disabled;
   final GlobalKey<FormState> key = GlobalKey();
   String? exercisename;
@@ -28,7 +30,10 @@ class _AddBottomSheetGymExerciseState extends State<AddBottomSheetGymExercise> {
     eid = BlocProvider.of<GymdayCubit>(context).eid! + 1;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.only(
+          left: 16.0,
+          right: 16,
+          bottom: MediaQuery.of(context).viewInsets.bottom),
       child: SingleChildScrollView(
         child: Form(
           key: key,
@@ -46,26 +51,48 @@ class _AddBottomSheetGymExerciseState extends State<AddBottomSheetGymExercise> {
               const SizedBox(
                 height: 16,
               ),
-              ExerciseDetails(
-                kg: (value) {
-                  kg = int.parse(value!);
-                },
-                rep: (value) {
-                  rep = int.parse(value!);
-                },
-                sets: (value) {
-                  sets = int.parse(value!);
-                },
-              ),
               const SizedBox(
                 height: 10,
               ),
-              MaterialButton(
-                onPressed: () {},
-                child: const Text(
-                  'Add More Rep',
-                  style: TextStyle(fontSize: 16),
-                ),
+              BlocBuilder<AddGymDayCubit, AddGymDayState>(
+                builder: (context, state) {
+                  if (counter == 1) {
+                    return Column(
+                      children: [
+                        RowsOfRep(num: num, lenght: 1),
+                        MaterialButton(
+                          onPressed: () {
+                            counter++;
+                            setState(() {});
+                          },
+                          child: const Text(
+                            'Add More Rep',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        RowsOfRep(
+                          num: num,
+                          lenght: counter,
+                        ),
+                        MaterialButton(
+                          onPressed: () {
+                            counter++;
+                            setState(() {});
+                          },
+                          child: const Text(
+                            'Add More Rep',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    );
+                  }
+                },
               ),
               const SizedBox(
                 height: 10,
@@ -77,13 +104,19 @@ class _AddBottomSheetGymExerciseState extends State<AddBottomSheetGymExercise> {
                     onTap: () {
                       if (key.currentState!.validate()) {
                         key.currentState!.save();
+                        print('lenght of array= ${num.length}');
+                        for (var element in num) {
+                          print(element);
+                        }
                         //set number of set rep kg
-                        ExerciseNumber exerciseNumber =
-                            ExerciseNumber(sets!, rep!, kg!, eid!);
-                        BlocProvider.of<AddGymDayCubit>(context)
-                            .addExerciseDetails(exerciseNumber);
-                        details.add(exerciseNumber);
-                        print('the set is'  '${details[0].set}');
+                        for (int i = 0; i < num.length; i=i+3) {
+                          details.add(ExerciseNumber(
+                              num[i], num[i + 1], num[i + 2], eid!)); //i=0
+                                                                      //=3
+                                                                      //=6
+                                                                      //=9
+                        }
+
                         //set exercise details
                         ExercisesModel exercisebox = ExercisesModel(
                             exercisename!, details, widget.card.id);
@@ -105,6 +138,37 @@ class _AddBottomSheetGymExerciseState extends State<AddBottomSheetGymExercise> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class RowsOfRep extends StatelessWidget {
+  int? kg, rep, sets;
+  int lenght;
+  List<int> num;
+  RowsOfRep({this.lenght = 1, required this.num});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 150,
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        padding: EdgeInsets.zero,
+        itemCount: lenght,
+        itemBuilder: (context, index) {
+          return ExerciseDetails(
+            sets: (value) {
+              num.add(int.parse(value!));
+            },
+            rep: (value) {
+              num.add(int.parse(value!));
+            },
+            kg: (value) {
+              num.add(int.parse(value!));
+            },
+          );
+        },
       ),
     );
   }

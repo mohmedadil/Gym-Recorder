@@ -16,9 +16,10 @@ class GymexercisesListView extends StatefulWidget {
 }
 
 class _GymexercisesListViewState extends State<GymexercisesListView> {
-  List<ExercisesModel> myexercise=[];
+  List<ExercisesModel> myexercise = [];
   @override
   void initState() {
+    BlocProvider.of<GymdayCubit>(context).fetchallexercisecard();
     super.initState();
   }
 
@@ -31,7 +32,6 @@ class _GymexercisesListViewState extends State<GymexercisesListView> {
 
         for (int i = 0; i < exercises.length; i++) {
           if (exercises[i].id == widget.card.id) {
-            print(exercises[i].exerciseName);
             myexercise.add(exercises[i]);
           }
         }

@@ -15,9 +15,9 @@ void main() async {
   Hive.registerAdapter(ExercisesModelAdapter());
   Hive.registerAdapter(ExerciseNumberAdapter());
 
-await Hive.openBox<GymModel>('gymboxcard');
-await Hive.openBox<ExercisesModel>('exercisemodelboxs');
-await Hive.openBox<ExerciseNumber>('exercisenumberboxs');
+  await Hive.openBox<GymModel>('gymboxcard');
+  await Hive.openBox<ExercisesModel>('exercisemodelboxs');
+  await Hive.openBox<ExerciseNumber>('exercisenumberboxs');
 
   Bloc.observer = Simpleobserver();
   runApp(const MyApp());
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => AddGymDayCubit(),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => GymdayCubit(),
         ),
       ],
